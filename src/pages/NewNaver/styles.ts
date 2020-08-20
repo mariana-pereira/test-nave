@@ -17,7 +17,7 @@ export const Form = styled.form`
     h1 {
       font: 24px Montserrat;
       font-weight: 600;
-      color: #212121;
+      color: var(--text-color);
       margin-left: 20px;
     }
   }
@@ -34,14 +34,14 @@ export const Form = styled.form`
       label {
         font-weight: 600;
         margin-bottom: 3px;
-        color: #212121;
+        color: var(--text-color);
         line-height: 18px;
       }
 
       input {
         width: 280px;
         height: 40px;
-        border: 1px solid #212121;
+        border: 1px solid var(--text-color);
         padding: 10px;
         font-size: 16px;
       }
@@ -57,9 +57,9 @@ export const Form = styled.form`
     button {
       width: 176px;
       height: 40px;
-      background: #212121;
+      background: var(--text-color);
       border: 0;
-      color: #ffffff;
+      color: var(--background-color);
       font-weight: 600;
       line-height: 24px;
       margin-top: 30px;

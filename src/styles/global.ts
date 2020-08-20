@@ -32,4 +32,13 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  h1, strong, span {
+    font: 14px Monteserrat, sans-serif;
+  }
+
+  :root {
+    --text-color: #212121;
+    --background-color: #ffffff;
+  }
 `;
