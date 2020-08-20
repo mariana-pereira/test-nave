@@ -1,9 +1,15 @@
 import React from 'react';
 
+import Header from '../../components/Header';
+
 import { Container } from './styles';
 
 const NewNaver: React.FC = () => {
-  return <h1>New Naver</h1>;
+  return (
+    <Container>
+      <Header />
+    </Container>
+  );
 };
 
 export default NewNaver;
