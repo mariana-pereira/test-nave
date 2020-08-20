@@ -24,12 +24,19 @@ interface Naver {
 
 const Home: React.FC = () => {
   const [navers, setNavers] = useState([]);
+  const [naverModalIsOpen, setNavModalIsOpen] = useState(false);
+  const [naverModalId, setNaverModalId] = useState('');
 
   useEffect(() => {
     api.get('/navers').then((response) => {
       setNavers(response.data);
     });
   }, []);
+
+  const handleOpenNaverModal = (id: string) => {
+    setNavModalIsOpen(true);
+    setNaverModalId(id);
+  };
 
   return (
     <>
@@ -42,7 +49,10 @@ const Home: React.FC = () => {
         <Navers>
           {navers &&
             navers.map((naver: Naver) => (
-              <Naver key={naver.id}>
+              <Naver
+                onClick={() => handleOpenNaverModal(naver.id)}
+                key={naver.id}
+              >
                 <img src={naver.url} alt={naver.name} />
                 <strong>{naver.name}</strong>
                 <span>{naver.job_role}</span>
@@ -54,7 +64,7 @@ const Home: React.FC = () => {
             ))}
         </Navers>
       </Container>
-      <NaverModal visible={false} />
+      <NaverModal visible={naverModalIsOpen} naver_id={naverModalId} />
       <DeleteModal visible={false} />
       <ConfirmationModal visible={false} />
     </>

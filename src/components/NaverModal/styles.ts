@@ -38,9 +38,14 @@ export const Naver = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    img {
-      width: 14px;
-      height: 14px;
+    button {
+      border: 0;
+      background: 0;
+
+      img {
+        width: 14px;
+        height: 14px;
+      }
     }
   }
 

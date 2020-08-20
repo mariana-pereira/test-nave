@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 
 import closeIcon from '../../assets/Close-Icon.png';
 import deleteIcon from '../../assets/Delete-Icon.png';
@@ -8,32 +9,57 @@ import { Container, Content, Naver } from './styles';
 
 interface ModalProps {
   visible: boolean;
+  naver_id: string;
 }
 
-const NaverModal: React.FC<ModalProps> = ({ visible }) => {
+interface Naver {
+  id: string;
+  name: string;
+  admission_date: Date;
+  job_role: string;
+  user_id: string;
+  project: string;
+  birthdate: Date;
+  url: string;
+}
+
+const NaverModal: React.FC<ModalProps> = ({ visible, naver_id }) => {
+  const [naver, setNaver] = useState<Naver | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    api.get(`navers/${naver_id}`).then((response) => {
+      setNaver(response.data);
+      setModalIsOpen(visible);
+    });
+  }, [naver_id, visible]);
+
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <Container open={visible}>
+    <Container open={modalIsOpen}>
       <Content>
-        <img
-          src="https://avatars0.githubusercontent.com/u/26336279?s=460&u=5b67ae546af49ac00ca125f373a3bbaf45a5f765&v=4"
-          alt="Mariana Pereira"
-        />
+        <img src={naver?.url} alt={naver?.name} />
         <Naver>
           <div className="close">
-            <img src={closeIcon} alt="Fechar" />
+            <button onClick={handleModalClose} type="button">
+              <img src={closeIcon} alt="Fechar" />
+            </button>
           </div>
           <div className="naver-info">
-            <h1>Mariana Pereira</h1>
-            <span>Front-end Developer</span>
+            <h1>{naver?.name}</h1>
+            <span>{naver?.job_role}</span>
 
             <strong>Idade</strong>
-            <span>Lorem Ipsum</span>
+            <span>{naver?.birthdate}</span>
 
             <strong>Tempo de empresa</strong>
-            <span>Lorem Ipsum</span>
+            <span>{naver?.admission_date}</span>
 
             <strong>Projetos que participou</strong>
-            <span>Lorem Ipsum</span>
+            <span>{naver?.project}</span>
 
             <div>
               <img src={deleteIcon} alt="Excluir" />
