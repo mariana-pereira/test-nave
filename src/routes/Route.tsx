@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 
+import { isAuthenticated } from '../services/auth';
+
 interface Props extends RouteProps {
   isPrivate?: boolean;
   component: React.ComponentType;
@@ -12,13 +14,12 @@ const RouteWrapper: React.FC<Props> = ({
   ...rest
 }) => {
   const location = useLocation();
-  const signed = false;
 
   return (
     <Route
       {...rest}
       render={() =>
-        !!signed === isPrivate ? (
+        !isAuthenticated === isPrivate ? (
           <Component />
         ) : (
           <Redirect
