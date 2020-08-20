@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
@@ -44,7 +45,9 @@ const Home: React.FC = () => {
       <Container>
         <div className="header">
           <h1>Navers</h1>
-          <button type="button">Adicionar Naver</button>
+          <button type="button">
+            <Link to="/new-naver">Adicionar Naver</Link>
+          </button>
         </div>
         <Navers>
           {navers &&

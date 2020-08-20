@@ -25,9 +25,12 @@ export const Container = styled.div`
       height: 40px;
       background: var(--text-color);
       border: 0;
-      color: var(--background-color);
-      font-weight: 600;
-      line-height: 24px;
+
+      a {
+        color: var(--background-color);
+        font-weight: 600;
+        line-height: 24px;
+      }
     }
   }
 `;
