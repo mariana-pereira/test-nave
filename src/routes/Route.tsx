@@ -19,7 +19,7 @@ const RouteWrapper: React.FC<Props> = ({
     <Route
       {...rest}
       render={() =>
-        !isAuthenticated === isPrivate ? (
+        !!isAuthenticated === isPrivate ? (
           <Component />
         ) : (
           <Redirect
@@ -28,7 +28,8 @@ const RouteWrapper: React.FC<Props> = ({
               state: { from: location },
             }}
           />
-        )}
+        )
+      }
     />
   );
 };
