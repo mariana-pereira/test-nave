@@ -10,15 +10,15 @@ export default createGlobalStyle`
 
   html, body, #root {
     height: 100%;
-    background: #fff;
+    background: #ffffff;
   }
 
   body {
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
-    font: 14px 'Monteserrat', sans-serif;
+  body, input, button, label {
+    font: 14px Monteserrat, sans-serif;
   }
 
   a {
