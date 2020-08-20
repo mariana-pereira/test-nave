@@ -32,6 +32,7 @@ export const Form = styled.form`
       color: #212121;
       line-height: 18px;
       font-weight: 600;
+      margin-bottom: 3px;
     }
 
     input {
@@ -39,7 +40,6 @@ export const Form = styled.form`
       border: 1px solid #212121;
       padding: 10px;
       font-size: 16px;
-      margin-top: 3px;
     }
   }
 
@@ -50,6 +50,7 @@ export const Form = styled.form`
     background: #212121;
     color: #ffffff;
     font-weight: bold;
+    line-height: 24px;
     border: 0;
   }
 `;
