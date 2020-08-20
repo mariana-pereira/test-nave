@@ -32,4 +32,9 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  :root {
+    --text-color: #212121;
+    --background-color: #ffffff;
+  }
 `;

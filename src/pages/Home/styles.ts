@@ -17,15 +17,15 @@ export const Container = styled.div`
       font-size: 40px;
       line-height: 48px;
       font-weight: 600;
-      color: #212121;
+      color: var(--text-color);
     }
 
     button {
       width: 176px;
       height: 40px;
-      background: #212121;
+      background: var(--text-color);
       border: 0;
-      color: #ffffff;
+      color: var(--background-color);
       font-weight: 600;
       line-height: 24px;
     }
@@ -52,14 +52,14 @@ export const Naver = styled.div`
     font-size: 16px;
     line-height: 18px;
     font-weight: 600;
-    color: #212121;
+    color: var(--text-color);
     margin-top: 10px;
   }
 
   span {
     font-size: 16px;
     line-height: 24px;
-    color: #212121;
+    color: var(--text-color);
     margin-top: 6px;
   }
 

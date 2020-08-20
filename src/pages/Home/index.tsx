@@ -6,6 +6,7 @@ import deleteIcon from '../../assets/Delete-Icon.png';
 import editIcon from '../../assets/Edit-Icon.png';
 
 import { Container, Navers, Naver } from './styles';
+import NaverModal from '../../components/NaverModal';
 
 const Home: React.FC = () => {
   return (
@@ -70,6 +71,7 @@ const Home: React.FC = () => {
           </Naver>
         </Navers>
       </Container>
+      <NaverModal visible />
     </>
   );
 };

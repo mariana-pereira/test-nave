@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Form = styled.form`
   width: 448px;
   height: 408px;
-  border: 1px solid #212121;
+  border: 1px solid var(--text-color);
   padding: 32px;
 
   display: flex;
@@ -29,7 +29,7 @@ export const Form = styled.form`
     margin-top: 30px;
 
     label {
-      color: #212121;
+      color: var(--text-color);
       line-height: 18px;
       font-weight: 600;
       margin-bottom: 3px;
@@ -37,7 +37,7 @@ export const Form = styled.form`
 
     input {
       height: 40px;
-      border: 1px solid #212121;
+      border: 1px solid var(--text-color);
       padding: 10px;
       font-size: 16px;
     }
@@ -47,8 +47,8 @@ export const Form = styled.form`
     width: 100%;
     height: 40px;
     margin-top: 40px;
-    background: #212121;
-    color: #ffffff;
+    background: var(--text-color);
+    color: var(--background-color);
     font-weight: bold;
     line-height: 24px;
     border: 0;
