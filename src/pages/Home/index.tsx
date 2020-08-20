@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 import NaverModal from '../../components/NaverModal';
@@ -10,7 +11,26 @@ import editIcon from '../../assets/Edit-Icon.png';
 
 import { Container, Navers, Naver } from './styles';
 
+interface Naver {
+  id: string;
+  name: string;
+  admission_date: Date;
+  job_role: string;
+  user_id: string;
+  project: string;
+  birthdate: Date;
+  url: string;
+}
+
 const Home: React.FC = () => {
+  const [navers, setNavers] = useState([]);
+
+  useEffect(() => {
+    api.get('/navers').then((response) => {
+      setNavers(response.data);
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -20,57 +40,18 @@ const Home: React.FC = () => {
           <button type="button">Adicionar Naver</button>
         </div>
         <Navers>
-          <Naver>
-            <img
-              src="https://avatars0.githubusercontent.com/u/26336279?s=460&u=5b67ae546af49ac00ca125f373a3bbaf45a5f765&v=4"
-              alt="Mariana Pereira"
-            />
-            <strong>Mariana Pereira</strong>
-            <span>Front-end Developer</span>
-            <div>
-              <img src={deleteIcon} alt="Excluir" />
-              <img src={editIcon} alt="Editar" />
-            </div>
-          </Naver>
-
-          <Naver>
-            <img
-              src="https://avatars0.githubusercontent.com/u/26336279?s=460&u=5b67ae546af49ac00ca125f373a3bbaf45a5f765&v=4"
-              alt="Mariana Pereira"
-            />
-            <strong>Mariana Pereira</strong>
-            <span>Front-end Developer</span>
-            <div>
-              <img src={deleteIcon} alt="Excluir" />
-              <img src={editIcon} alt="Editar" />
-            </div>
-          </Naver>
-
-          <Naver>
-            <img
-              src="https://avatars0.githubusercontent.com/u/26336279?s=460&u=5b67ae546af49ac00ca125f373a3bbaf45a5f765&v=4"
-              alt="Mariana Pereira"
-            />
-            <strong>Mariana Pereira</strong>
-            <span>Front-end Developer</span>
-            <div>
-              <img src={deleteIcon} alt="Excluir" />
-              <img src={editIcon} alt="Editar" />
-            </div>
-          </Naver>
-
-          <Naver>
-            <img
-              src="https://avatars0.githubusercontent.com/u/26336279?s=460&u=5b67ae546af49ac00ca125f373a3bbaf45a5f765&v=4"
-              alt="Mariana Pereira"
-            />
-            <strong>Mariana Pereira</strong>
-            <span>Front-end Developer</span>
-            <div>
-              <img src={deleteIcon} alt="Excluir" />
-              <img src={editIcon} alt="Editar" />
-            </div>
-          </Naver>
+          {navers &&
+            navers.map((naver: Naver) => (
+              <Naver key={naver.id}>
+                <img src={naver.url} alt={naver.name} />
+                <strong>{naver.name}</strong>
+                <span>{naver.job_role}</span>
+                <div>
+                  <img src={deleteIcon} alt="Excluir" />
+                  <img src={editIcon} alt="Editar" />
+                </div>
+              </Naver>
+            ))}
         </Navers>
       </Container>
       <NaverModal visible={false} />

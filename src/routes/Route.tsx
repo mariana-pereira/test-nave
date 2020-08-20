@@ -14,12 +14,13 @@ const RouteWrapper: React.FC<Props> = ({
   ...rest
 }) => {
   const location = useLocation();
+  const signed = isAuthenticated();
 
   return (
     <Route
       {...rest}
       render={() =>
-        !!isAuthenticated === isPrivate ? (
+        !!signed === isPrivate ? (
           <Component />
         ) : (
           <Redirect
