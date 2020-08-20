@@ -14,7 +14,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${(props) => !props.open && `visibility: hidden`}
+  ${(props) => !props.open && `visibility: hidden`};
 `;
 
 export const Content = styled.div`
