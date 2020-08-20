@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import Header from '../../components/Header';
+import ConfirmationModal from '../../components/ConfirmationModal';
 import Icon from '../../assets/Vector.png';
 
 import { Container, Form } from './styles';
 
 const NewNaver: React.FC = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [age, setAge] = useState('');
@@ -33,6 +36,8 @@ const NewNaver: React.FC = () => {
     setTime('');
     setProject('');
     setUrl('');
+
+    setModalIsOpen(true);
   };
 
   return (
@@ -113,6 +118,11 @@ const NewNaver: React.FC = () => {
           </div>
         </Form>
       </Container>
+      <ConfirmationModal
+        title="Naver criado"
+        message="Naver criado com sucesso!"
+        visible={modalIsOpen}
+      />
     </>
   );
 };

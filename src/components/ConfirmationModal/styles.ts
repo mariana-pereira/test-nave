@@ -48,9 +48,14 @@ export const Content = styled.div`
     right: 0;
     margin: 30px;
 
-    img {
-      width: 14px;
-      height: 14px;
+    button {
+      border: 0;
+      background: none;
+
+      img {
+        width: 14px;
+        height: 14px;
+      }
     }
   }
 `;

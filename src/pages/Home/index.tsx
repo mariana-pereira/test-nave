@@ -5,7 +5,6 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import NaverModal from '../../components/NaverModal';
 import DeleteModal from '../../components/DeleteModal';
-import ConfirmationModal from '../../components/ConfirmationModal';
 
 import deleteIcon from '../../assets/Delete-Icon.png';
 import editIcon from '../../assets/Edit-Icon.png';
@@ -61,7 +60,9 @@ const Home: React.FC = () => {
                 <span>{naver.job_role}</span>
                 <div>
                   <img src={deleteIcon} alt="Excluir" />
-                  <img src={editIcon} alt="Editar" />
+                  <Link to={`edit-naver/${naver.id}`}>
+                    <img src={editIcon} alt="Editar" />
+                  </Link>
                 </div>
               </Naver>
             ))}
@@ -69,7 +70,6 @@ const Home: React.FC = () => {
       </Container>
       <NaverModal visible={naverModalIsOpen} naver_id={naverModalId} />
       <DeleteModal visible={false} />
-      <ConfirmationModal visible={false} />
     </>
   );
 };
