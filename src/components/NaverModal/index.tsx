@@ -16,10 +16,12 @@ interface Naver {
   id: string;
   name: string;
   admission_date: Date;
+  time: string;
   job_role: string;
   user_id: string;
   project: string;
   birthdate: Date;
+  age: string;
   url: string;
 }
 
@@ -39,10 +41,10 @@ const NaverModal: React.FC<ModalProps> = ({ visible, closeModal, naver }) => {
             <span>{naver?.job_role}</span>
 
             <strong>Idade</strong>
-            <span>{naver?.birthdate}</span>
+            <span>{naver?.age}</span>
 
             <strong>Tempo de empresa</strong>
-            <span>{naver?.admission_date}</span>
+            <span>{naver?.time}</span>
 
             <strong>Projetos que participou</strong>
             <span>{naver?.project}</span>

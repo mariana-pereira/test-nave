@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDistance } from 'date-fns';
+import { pt } from 'date-fns/locale';
+
 import api from '../../services/api';
 
 import Header from '../../components/Header';
@@ -16,10 +19,12 @@ interface Naver {
   id: string;
   name: string;
   admission_date: Date;
+  time: string;
   job_role: string;
   user_id: string;
   project: string;
   birthdate: Date;
+  age: string;
   url: string;
 }
 
@@ -39,8 +44,18 @@ const Home: React.FC = () => {
 
   const handleOpenNaverModal = async (id: string) => {
     const response = await api.get(`/navers/${id}`);
+
+    setNaver({
+      ...response.data,
+      time: formatDistance(new Date(response.data.admission_date), new Date(), {
+        locale: pt,
+      }),
+      age: formatDistance(new Date(response.data.birthdate), new Date(), {
+        locale: pt,
+      }),
+    });
+
     setNaverModalIsOpen(true);
-    setNaver(response.data);
   };
 
   const handleDeleteNaver = async () => {
