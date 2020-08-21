@@ -47,6 +47,8 @@ const Home: React.FC = () => {
     await api.delete(`navers/${naverId}`);
     setDeleteModalIsOpen(false);
     setConfirmationModalIsOpen(true);
+
+    setNavers(navers.filter((item: Naver) => item.id !== naverId));
   };
 
   const handleOpenDeleteModal = (id: string) => {
