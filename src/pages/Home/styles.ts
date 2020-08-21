@@ -46,6 +46,11 @@ export const Naver = styled.div`
   display: flex;
   flex-direction: column;
 
+  button {
+    border: 0;
+    background: none;
+  }
+
   img {
     width: 280px;
     height: 280px;
@@ -73,10 +78,10 @@ export const Naver = styled.div`
     img {
       width: 24px;
       height: 24px;
+    }
 
-      & + img {
-        margin-left: 10px;
-      }
+    a {
+      margin-left: 10px;
     }
   }
 `;

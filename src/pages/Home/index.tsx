@@ -24,8 +24,9 @@ interface Naver {
 
 const Home: React.FC = () => {
   const [navers, setNavers] = useState([]);
-  const [naverModalIsOpen, setNavModalIsOpen] = useState(false);
+  const [naverModalIsOpen, setNaverModalIsOpen] = useState(false);
   const [naverModalId, setNaverModalId] = useState('');
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
   useEffect(() => {
     api.get('/navers').then((response) => {
@@ -34,7 +35,12 @@ const Home: React.FC = () => {
   }, []);
 
   const handleOpenNaverModal = (id: string) => {
-    setNavModalIsOpen(true);
+    setNaverModalIsOpen(true);
+    setNaverModalId(id);
+  };
+
+  const handleOpenDeleteModal = (id: string) => {
+    setDeleteModalIsOpen(true);
     setNaverModalId(id);
   };
 
@@ -51,15 +57,22 @@ const Home: React.FC = () => {
         <Navers>
           {navers &&
             navers.map((naver: Naver) => (
-              <Naver
-                onClick={() => handleOpenNaverModal(naver.id)}
-                key={naver.id}
-              >
-                <img src={naver.url} alt={naver.name} />
+              <Naver key={naver.id}>
+                <button
+                  onClick={() => handleOpenNaverModal(naver.id)}
+                  type="button"
+                >
+                  <img src={naver.url} alt={naver.name} />
+                </button>
                 <strong>{naver.name}</strong>
                 <span>{naver.job_role}</span>
                 <div>
-                  <img src={deleteIcon} alt="Excluir" />
+                  <button
+                    onClick={() => handleOpenDeleteModal(naver.id)}
+                    type="button"
+                  >
+                    <img src={deleteIcon} alt="Excluir" />
+                  </button>
                   <Link to={`edit-naver/${naver.id}`}>
                     <img src={editIcon} alt="Editar" />
                   </Link>
@@ -69,7 +82,7 @@ const Home: React.FC = () => {
         </Navers>
       </Container>
       <NaverModal visible={naverModalIsOpen} naver_id={naverModalId} />
-      <DeleteModal visible={false} />
+      <DeleteModal visible={deleteModalIsOpen} naver_id={naverModalId} />
     </>
   );
 };
