@@ -14,7 +14,7 @@ const Routes: React.FC = () => {
         <Route path="/" exact component={Login} />
         <Route path="/home" component={Home} isPrivate />
         <Route path="/new-naver" component={NewNaver} isPrivate />
-        <Route path="/edit-naver/:naver" component={EditNaver} isPrivate />
+        <Route path="/edit-naver/:naver_id" component={EditNaver} isPrivate />
       </Switch>
     </BrowserRouter>
   );
