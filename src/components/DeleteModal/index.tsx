@@ -1,51 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
+import React from 'react';
 
 import { Container, Content } from './styles';
-import ConfirmationModal from '../ConfirmationModal';
 
 interface ModalProps {
   visible: boolean;
-  naver_id: string;
+  closeModal(): void;
+  deleteNaver(): void;
 }
 
-const DeleteModal: React.FC<ModalProps> = ({ visible, naver_id }) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [confirmationModalIsOpen, setConfirmationModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    setModalIsOpen(visible);
-  }, [visible]);
-
-  const handleDeleteNaver = async () => {
-    setModalIsOpen(false);
-    await api.delete(`navers/${naver_id}`);
-    setConfirmationModalIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
-
+const DeleteModal: React.FC<ModalProps> = ({
+  visible,
+  closeModal,
+  deleteNaver,
+}) => {
   return (
-    <Container open={modalIsOpen}>
+    <Container open={visible}>
       <Content>
         <h1>Excluir Naver</h1>
         <span>Tem certeza que deseja excluir este Naver?</span>
         <div>
-          <button onClick={handleCloseModal} className="cancel" type="button">
+          <button onClick={closeModal} className="cancel" type="button">
             Cancelar
           </button>
-          <button onClick={handleDeleteNaver} className="delete" type="button">
+          <button onClick={deleteNaver} className="delete" type="button">
             Excluir
           </button>
         </div>
       </Content>
-      <ConfirmationModal
-        title="Naver excluído"
-        message="Naver excluído com sucesso!"
-        visible={confirmationModalIsOpen}
-      />
     </Container>
   );
 };

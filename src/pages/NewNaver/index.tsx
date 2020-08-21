@@ -122,6 +122,7 @@ const NewNaver: React.FC = () => {
         title="Naver criado"
         message="Naver criado com sucesso!"
         visible={modalIsOpen}
+        closeModal={() => setModalIsOpen(false)}
       />
     </>
   );

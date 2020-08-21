@@ -57,7 +57,7 @@ const EditNaver: React.FC = () => {
             <Link to="/home">
               <img src={Icon} alt="Voltar" />
             </Link>
-            <h1>Adicionar Naver</h1>
+            <h1>Editar Naver</h1>
           </div>
           <div className="input-container">
             <div>
@@ -130,6 +130,7 @@ const EditNaver: React.FC = () => {
         title="Naver atualizado"
         message="Naver atualizado com sucesso!"
         visible={modalIsOpen}
+        closeModal={() => setModalIsOpen(false)}
       />
     </>
   );

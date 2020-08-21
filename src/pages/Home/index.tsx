@@ -5,6 +5,7 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import NaverModal from '../../components/NaverModal';
 import DeleteModal from '../../components/DeleteModal';
+import ConfirmationModal from '../../components/ConfirmationModal';
 
 import deleteIcon from '../../assets/Delete-Icon.png';
 import editIcon from '../../assets/Edit-Icon.png';
@@ -24,9 +25,11 @@ interface Naver {
 
 const Home: React.FC = () => {
   const [navers, setNavers] = useState([]);
+  const [naver, setNaver] = useState<Naver>({} as Naver);
+  const [naverId, setNaverId] = useState('');
   const [naverModalIsOpen, setNaverModalIsOpen] = useState(false);
-  const [naverModalId, setNaverModalId] = useState('');
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [confirmationModalIsOpen, setConfirmationModalIsOpen] = useState(false);
 
   useEffect(() => {
     api.get('/navers').then((response) => {
@@ -34,14 +37,21 @@ const Home: React.FC = () => {
     });
   }, []);
 
-  const handleOpenNaverModal = (id: string) => {
+  const handleOpenNaverModal = async (id: string) => {
+    const response = await api.get(`/navers/${id}`);
     setNaverModalIsOpen(true);
-    setNaverModalId(id);
+    setNaver(response.data);
+  };
+
+  const handleDeleteNaver = async () => {
+    await api.delete(`navers/${naverId}`);
+    setDeleteModalIsOpen(false);
+    setConfirmationModalIsOpen(true);
   };
 
   const handleOpenDeleteModal = (id: string) => {
+    setNaverId(id);
     setDeleteModalIsOpen(true);
-    setNaverModalId(id);
   };
 
   return (
@@ -56,24 +66,24 @@ const Home: React.FC = () => {
         </div>
         <Navers>
           {navers &&
-            navers.map((naver: Naver) => (
-              <Naver key={naver.id}>
+            navers.map((item: Naver) => (
+              <Naver key={item.id}>
                 <button
-                  onClick={() => handleOpenNaverModal(naver.id)}
+                  onClick={() => handleOpenNaverModal(item.id)}
                   type="button"
                 >
-                  <img src={naver.url} alt={naver.name} />
+                  <img src={item.url} alt={item.name} />
                 </button>
-                <strong>{naver.name}</strong>
-                <span>{naver.job_role}</span>
+                <strong>{item.name}</strong>
+                <span>{item.job_role}</span>
                 <div>
                   <button
-                    onClick={() => handleOpenDeleteModal(naver.id)}
+                    onClick={() => handleOpenDeleteModal(item.id)}
                     type="button"
                   >
                     <img src={deleteIcon} alt="Excluir" />
                   </button>
-                  <Link to={`edit-naver/${naver.id}`}>
+                  <Link to={`edit-naver/${item.id}`}>
                     <img src={editIcon} alt="Editar" />
                   </Link>
                 </div>
@@ -81,8 +91,22 @@ const Home: React.FC = () => {
             ))}
         </Navers>
       </Container>
-      <NaverModal visible={naverModalIsOpen} naver_id={naverModalId} />
-      <DeleteModal visible={deleteModalIsOpen} naver_id={naverModalId} />
+      <NaverModal
+        visible={naverModalIsOpen}
+        naver={naver}
+        closeModal={() => setNaverModalIsOpen(false)}
+      />
+      <DeleteModal
+        visible={deleteModalIsOpen}
+        closeModal={() => setDeleteModalIsOpen(false)}
+        deleteNaver={handleDeleteNaver}
+      />
+      <ConfirmationModal
+        title="Naver excluído"
+        message="Naver excluído com sucesso"
+        closeModal={() => setConfirmationModalIsOpen(false)}
+        visible={confirmationModalIsOpen}
+      />
     </>
   );
 };

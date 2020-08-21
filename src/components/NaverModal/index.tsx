@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import React from 'react';
 
 import closeIcon from '../../assets/Close-Icon.png';
 import deleteIcon from '../../assets/Delete-Icon.png';
@@ -9,7 +8,8 @@ import { Container, Content, Naver } from './styles';
 
 interface ModalProps {
   visible: boolean;
-  naver_id: string;
+  closeModal(): void;
+  naver: Naver;
 }
 
 interface Naver {
@@ -23,28 +23,14 @@ interface Naver {
   url: string;
 }
 
-const NaverModal: React.FC<ModalProps> = ({ visible, naver_id }) => {
-  const [naver, setNaver] = useState<Naver | null>(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    api.get(`navers/${naver_id}`).then((response) => {
-      setNaver(response.data);
-      setModalIsOpen(visible);
-    });
-  }, [naver_id, visible]);
-
-  const handleModalClose = () => {
-    setModalIsOpen(false);
-  };
-
+const NaverModal: React.FC<ModalProps> = ({ visible, closeModal, naver }) => {
   return (
-    <Container open={modalIsOpen}>
+    <Container open={visible}>
       <Content>
         <img src={naver?.url} alt={naver?.name} />
         <Naver>
           <div className="close">
-            <button onClick={handleModalClose} type="button">
+            <button onClick={closeModal} type="button">
               <img src={closeIcon} alt="Fechar" />
             </button>
           </div>
